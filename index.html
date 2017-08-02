@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script
+    src="http://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous">    
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+</head>
+
+<body>
+  
+  <div class='container'>
+    <div class='left-col'>
+      <h1>Player 1</h1>
+      <form>
+        Enter a username:<br>
+        <input id="p1UsernameInput" type="text">
+        <input id="p1UsernameBtn" type="submit" id="addBtn">
+      </form>
+      <div class='leftColBtns'>
+        <button class='input' type='button' data-name='player1Choice' data-value='r'>Rock</button>
+        <button class='input' type='button' data-name='player1Choice' data-value='p'>Paper</button>
+        <button class='input' type='button' data-name='player1Choice' data-value='s'>Scissors</button>
+      </div>
+      <div>
+        <p>Wins<br><span id='player1Wins'></span></p>
+        <p>Losses<br><span id='player1Losses'></span></p>
+        <p>Ties<br><span id='player1Ties'></span></p>
+      </div>
+    </div>
+    <div class='center-col'>
+      <div class='gameDisplay'>Game Display</div>
+      <div class='chatWindow'>Chat Window</div>
+    </div>
+    <div class='right-col'>
+      <h1>Player 2</h1>
+      <form>
+        Enter a username:<br>
+        <input id="p1UsernameInput" type="text">
+        <input id="p1UsernameBtn" type="submit" id="addBtn">
+      </form>
+      <div class='rightColBtns'>
+        <button class='input' type='button' data-name='player2Choice' data-value='r'>Rock</button>
+        <button class='input' type='button' data-name='player2Choice' data-value='p'>Paper</button>
+        <button class='input' type='button' data-name='player2Choice' data-value='s'>Scissors</button>
+      </div>
+      <div>
+        <p>Wins<br><span id='player2Wins'></span></p>
+        <p>Losses<br><span id='player2Losses'></span></p>
+        <p>Ties<br><span id='player2Ties'></span></p>
+      </div>
+    </div>
+  </div>
+  <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>

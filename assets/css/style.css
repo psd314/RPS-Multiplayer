@@ -1,0 +1,36 @@
+* {
+	box-sizing: border-box;
+}
+
+.container {
+	display: flex;
+	width: 80%;
+	margin: 30px auto;
+}
+
+.left-col,
+.center-col,
+.right-col {
+	border: 3px solid green;
+}
+
+.left-col,
+.right-col {
+	width: 25%;
+	text-align: center;
+}
+
+.center-col {
+	width: 50%;
+	height: 500px;
+	text-align: center;
+}
+
+.gameDisplay {
+	height: 95%;
+}
+
+.chatWindow {
+	height: 5%;
+	border: 3px solid purple;
+}
