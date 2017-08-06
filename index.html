@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://use.fontawesome.com/9b186a5162.js"></script>
     <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -29,17 +30,28 @@
             <p>Losses: <span id='player1Losses'></span></p>
             <p>Ties: <span id='player1Ties'></span></p>
           </div>
-          <div class='player1Btns'>
-            <button class='input p1Val' type='button'  data-value='Rock'>Rock</button>
-            <button class='input p1Val' type='button'  data-value='Paper'>Paper</button>
-            <button class='input p1Val' type='button'  data-value='Scissors'>Scissors</button>
-          </div>
           <div id='player1Name' data-status='open'>Waiting for Player 1...</div>
+          <div class='player1Btns'>
+            <button class='input p1Val player1Val' type='button'  data-value='Rock'><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i></button>
+            <button class='input p1Val player1Val' type='button'  data-value='Paper'><i class="fa fa-hand-paper-o fa-3x"></i></button>
+            <button class='input p1Val player1Val' type='button'  data-value='Scissors'><i class="fa fa-hand-scissors-o fa-3x"></i></button>
+          </div>
         </div>
         <div class='center-col'>
           <div class='gameDisplay'>
-            Welcome to the Rock, Paper, Scissors Online Championship!
+            Rock, Paper, Scissors Online Championship!
           </div>
+          <div class='chatContainer'>
+            <h3 class='chatHeader'>Chat Room</h3>
+            <div class='chatWindow'>
+              <div id='chatMessages'></div>
+            </div>
+            <div class='chatInput'>
+              <form>
+                <input id="chatField" type="text"><input id="chatBtn" type="submit">
+              </form>
+            </div>
+          </div>          
         </div>
         <div class='right-col'>
           <h1 id='p2Heading'>Player 2</h1>
@@ -49,23 +61,16 @@
             <p>Ties: <span id='player2Ties'></span></p>
           </div>
           <div class='player2Btns'>
-            <button class='input p2Val' type='button'  data-value='Rock' >Rock</button>
-            <button class='input p2Val' type='button'  data-value='Paper' >Paper</button>
-            <button class='input p2Val' type='button'  data-value='Scissors' >Scissors</button>
+            <button class='input p2Val player2Val' type='button'  data-value='Rock' ><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i>
+            </button>
+            <button class='input p2Val player2Val' type='button'  data-value='Paper' ><i class="fa fa-hand-paper-o fa-3x"></i></button>
+            <button class='input p2Val player2Val' type='button'  data-value='Scissors' ><i class="fa fa-hand-scissors-o fa-3x"></i></button>
           </div>
           <div id='player2Name' data-status='open'>Waiting for Player 2...</div>
         </div>
         </div> <!-- /.playerContainer -->
-        <div class='chatWindow'>
-          <h3>Chat Window</h3>
-          <div id='chatMessages'></div>
-        </div>
         
-        <div class='chatInput'>
-          <form>
-            <input id="chatField" type="text"><input id="chatBtn" type="submit">
-          </form>
-        </div>
+        
         </div>  <!-- /.container -->
         <script src="assets/javascript/app2.js"></script>
       </body>

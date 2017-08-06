@@ -3,7 +3,7 @@
 }
 
 .container {
-	width: 80%;
+	width: 60%;
 	margin: 30px auto;
 }
 
@@ -22,7 +22,7 @@
 .left-col,
 .center-col,
 .right-col {
-	border: 3px solid green;
+	border: 1px solid black;
 }
 
 .left-col,
@@ -33,18 +33,42 @@
 
 .center-col {
 	width: 50%;
-	height: 300px;
+	/*height: 300px;*/
 	text-align: center;
 }
 
 .gameDisplay {
-	height: 95%;
+	height: 200px;
 }
 
+.chatContainer {
+	margin: auto;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.chatContainer h3 {
+	display: inline-block;
+	margin: 0;
+}
+ 
 .chatWindow {
-	height: 200px;
-	border: 3px solid purple;
+	height: 100px;
+	text-align: left;
 	overflow-y: scroll;
 	overflow-x: auto;
 	word-break: break-all;
+}
+
+#chatField {
+	width: 85%;
+}
+
+#chatBtn {
+	width: 15%;
+}
+
+ button {
+	background-color: transparent;
+	border: none;
 }

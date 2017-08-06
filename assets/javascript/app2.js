@@ -7,6 +7,7 @@ var player1; // playerObj instance
 var player2; // playerObj instance
 var chatText;
 var disconnected;
+var tie;
 
 var config = {
     apiKey: "AIzaSyAt7Zo2dzpJKR8aTFUSKY-U4tgvDIezWjc",
@@ -95,7 +96,7 @@ function updateLosses(player, path) {
 
 function reset() {
     setTimeout(function() {
-        $('.gameDisplay').text('Who will be victorious?');
+        $('.gameDisplay').html("<h2>Let's Play RPS!!!</h2>");
         database.ref().update({
             turn: 1
         });
@@ -103,17 +104,16 @@ function reset() {
 }
 
 function updateStats(winner, winnerPath, loser, loserPath, ) {
-    $('.gameDisplay').html('<div><strong>' + winnerPath.username + ' </strong>chose ' + winnerPath.choice + '</div>' +
-        '<div><strong>' + loserPath.username + ' </strong>chose ' + loserPath.choice + '</div>' +
-        '<h1><strong>' + winnerPath.username + '</strong> Wins!!!</h1>');
+    $('.gameDisplay').html('<h1><strong>' + winnerPath.username + '</strong> Wins!!!</h1>' + '<div><strong>' + winnerPath.username + ' </strong>chose ' +
+        $(`.${winner}Val[data-value=${winnerPath.choice}]`).html() + '</div>' +
+        '<div><strong>' + loserPath.username + ' </strong>chose ' +
+        $(`.${loser}Val[data-value=${loserPath.choice}]`).html() + '</div>');
     updateWins(winner, winnerPath.wins);
     updateLosses(loser, loserPath.losses);
     reset();
 }
 
 $(document).ready(function() {
-    // add back in way 100% sure that hiding is working without it 
-    // prevents html flashing then hiding on page load due to fb db lag
     // $('.player1Btns, .player1Stats, .player2Btns, .player2Stats').hide();
     // monitor partieds connected to fb db
     connectedRef.on("value", function(snap) {
@@ -200,7 +200,7 @@ $(document).ready(function() {
             $('#chatField').val("");
             $('.chatWindow').scrollTop($('.chatWindow').prop('scrollHeight')); // auto-scroll window
             database.ref('chat').update({
-                chatText: ""    // allows repeat messages
+                chatText: "" // allows repeat messages
             });
         }
     });
@@ -241,12 +241,12 @@ $(document).ready(function() {
             // button/html display behavior based on turn and connectionId
             if (snapshot.val().turn === 1) {
                 if (snapshot.val().player1.connectionId === connectionId) {
-                    $('.gameDisplay').text('Who will be victorious?');
+                    $('.gameDisplay').html("<h2>Let's Play RPS!!!</h2>");
                     $('.player1Btns').show();
                     $('#player1Name').text("It's your turn");
 
                 } else if (snapshot.val().player2.connectionId === connectionId) {
-                    $('.gameDisplay').text('Who will be victorious?');
+                    $('.gameDisplay').html("<h2>Let's Play RPS!!!</h2>");
                     $('#player2Name').append('<br>Waiting for Player 1 to choose');
 
                 }
@@ -266,7 +266,9 @@ $(document).ready(function() {
             // game logic - compare player choices and update page accordingly
             if (snapshot.val().player1.choice === snapshot.val().player2.choice &&
                 snapshot.val().player1.choice !== "" && snapshot.val().player2.choice !== "") {
-                $('.gameDisplay').text('Tie Game! You both chose: ' + snapshot.val().player1.choice);
+                // $('.gameDisplay').text('Tie Game! You both chose: ' + snapshot.val().player1.choice);
+                tie = snapshot.val().player1.choice;
+                $('.gameDisplay').html('<h1>Tie Game!</h1><div>You both chose:</div><div>' + $(`.player1Val[data-value=${tie}]`).html() + '</div>');
                 tieGame(snapshot);
 
             } else if (snapshot.val().player1.choice === 'Rock' && snapshot.val().player2.choice === 'Scissors') {
@@ -289,10 +291,9 @@ $(document).ready(function() {
 
             }
         }
-    });     // end database.ref().on('value') listener
-});     // end $(document).ready()
+    }); // end database.ref().on('value') listener
+}); // end $(document).ready()
 
-// fix title to spot 
 // styling 
 // validate files
 // deploy to git hub pages and test
