@@ -33,7 +33,7 @@
 
 .center-col {
 	width: 50%;
-	height: 500px;
+	height: 300px;
 	text-align: center;
 }
 
@@ -42,6 +42,9 @@
 }
 
 .chatWindow {
-	height: 5%;
+	height: 200px;
 	border: 3px solid purple;
+	overflow-y: scroll;
+	overflow-x: auto;
+	word-break: break-all;
 }

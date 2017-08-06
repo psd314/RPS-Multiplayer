@@ -28,9 +28,9 @@
           <h1>Player 1</h1>
           <div id='player1Name' data-status='open'>Waiting for Player 1...</div>
           <div class='player1Btns'>
-            <button class='input' type='button'  data-value='r'>Rock</button>
-            <button class='input' type='button'  data-value='p'>Paper</button>
-            <button class='input' type='button'  data-value='s'>Scissors</button>
+            <button class='input p1Val' type='button'  data-value='r'>Rock</button>
+            <button class='input p1Val' type='button'  data-value='p'>Paper</button>
+            <button class='input p1Val' type='button'  data-value='s'>Scissors</button>
           </div>
           <div class='player1Stats'>
             <p>Wins<br><span id='player1Wins'></span></p>
@@ -47,9 +47,9 @@
           <h1>Player 2</h1>
           <div id='player2Name' data-status='open'>Waiting for Player 2...</div>
           <div class='player2Btns'>
-            <button class='input' type='button'  data-value='r' >Rock</button>
-            <button class='input' type='button'  data-value='p' >Paper</button>
-            <button class='input' type='button'  data-value='s' >Scissors</button>
+            <button class='input p2Val' type='button'  data-value='r' >Rock</button>
+            <button class='input p2Val' type='button'  data-value='p' >Paper</button>
+            <button class='input p2Val' type='button'  data-value='s' >Scissors</button>
           </div>
           <div class='player2Stats'>
             <p>Wins<br><span id='player2Wins'></span></p>
@@ -59,9 +59,18 @@
         </div>
       </div> <!-- /.playerContainer -->
 
-      <div class='chatWindow'>Chat Window</div>
+      <div class='chatWindow'>
+        <h3>Chat Window</h3>
+        <div id='chatMessages'></div>
+      </div>
+      
+      <div class='chatInput'>
+        <form>
+          <input id="chatField" type="text"><input id="chatBtn" type="submit">
+        </form> 
+      </div>
 
     </div>  <!-- /.container -->
-    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/app2.js"></script>
   </body>
 </html>

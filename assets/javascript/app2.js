@@ -1,14 +1,11 @@
 var con;
-var p1username;
-var p2username;
-var username;
-var player;
+var p1username;     // save p1 name from input
+var p2username;     // save p2 name from input
+var username;       // use to pass player (1 or 2) name into firebase
 var connectionId;
-var turn;
-var player1;
-var player2;
+var player1;    // playerObj instance
+var player2;    // playerObj instance
 var chatText;
-var chatId;
 var disconnected;
 
 var config = {
@@ -35,8 +32,36 @@ function playerObj(username, connectionId, choice, wins, losses, ties) {
         this.ties = ties
 }
 
-// push comments to chat window and have overflow:scroll for overflow?
-// update turn=1 and push to fb on disconnect
+function playerExists(playerNumber, playerPath, snapshot) {
+    $(`#player${playerNumber}Name`).attr('data-status', 'taken');
+    $(`#player${playerNumber}Name`).text(playerPath.username);
+    $(`#player${playerNumber}Wins`).text(playerPath.wins);
+    $(`#player${playerNumber}Losses`).text(playerPath.losses);
+    $(`#player${playerNumber}Ties`).text(playerPath.ties);
+    $(`.player${playerNumber}Stats`).show();
+
+    if (playerPath.connectionId === connectionId) {
+        $('p.playerSelectUI').text("Welcome " + playerPath.username + ". You are Player " + playerNumber);
+        $('input.playerSelectUI').hide();
+        $('div.chatInput').show();
+    }
+}
+
+function playerNotExists(playerNumber, oppNumber, oppPath, snapshot) {
+    $(`#player${playerNumber}Name`).attr('data-status', 'open')
+        .text("Waiting for Player...");
+    $(`.player${playerNumber}Stats`).hide();
+    $(`.player${playerNumber}Btns`).hide();
+    $(`.player${oppNumber}Btns`).hide();
+
+    if (snapshot.child(`player${oppNumber}`).exists()) {
+        if (connectionId !== oppPath.connectionId) {
+            $('p.playerSelectUI').text('Enter a username:');
+            $('.playerSelectUI').show();
+        }
+    }
+}
+
 function tieGame(snapshot) {
     database.ref('player1').update({
         choice: "",
@@ -79,7 +104,8 @@ function reset() {
 }
 
 $(document).ready(function() {
-    $('.player1Btns, .player1Stats, .player2Btns, .player2Stats').hide();
+    // add back in way 100% sure that hiding is working without it
+    // $('.player1Btns, .player1Stats, .player2Btns, .player2Stats').hide();
     // monitor connected parties on fb db
     connectedRef.on("value", function(snap) {
         if (snap.val()) {
@@ -99,10 +125,6 @@ $(document).ready(function() {
         if ($('#player1Name').attr('data-status') === 'open') {
             p1username = $('.usernameField').val();
             username = p1username;
-            $('p.playerSelectUI').text("Welcome " + p1username + ". You are Player 1");
-            $('input.playerSelectUI').hide();
-            $('#player1Name').text(p1username);
-            // function playerObj(username, , connectionId, choice, wins, losses, ties)
             player1 = new playerObj(p1username, con.path.ct[1], "", 0, 0, 0);
             database.ref().update({
                 player1: player1,
@@ -111,19 +133,14 @@ $(document).ready(function() {
 
             disconnected = username + ' has disconnected';
             database.ref("chat").onDisconnect().update({
-                chatText : disconnected
+                chatText: disconnected
             });
 
             database.ref("player1").onDisconnect().remove();
         } else if ($('#player1Name').attr('data-status') === 'taken') {
-            $('#player2Name').attr('data-status', 'taken');
             p2username = $('.usernameField').val();
             username = p2username;
-            $('p.playerSelectUI').text("Welcome " + p2username + ". You are Player 2");
-            $('input.playerSelectUI').hide();
-            $('#player2Name').text(p2username);
-            $('.player2Stats').show();
-            // function playerObj(username, choice, wins, losses, ties)
+
             player2 = new playerObj(p2username, con.path.ct[1], "", 0, 0, 0);
             database.ref().update({
                 player2: player2,
@@ -132,10 +149,30 @@ $(document).ready(function() {
 
             disconnected = username + ' has disconnected';
             database.ref("chat").onDisconnect().update({
-                chatText : disconnected
+                chatText: disconnected
             });
             database.ref("player2").onDisconnect().remove();
         }
+    });
+
+    $('.p1Val').on('click', function() {
+        player1.choice = $(this).attr('data-value');
+        database.ref("player1").update({
+            choice: $(this).attr('data-value')
+        });
+        database.ref().update({
+            turn: 2
+        });
+    });
+
+    $('.p2Val').on('click', function() {
+        player2.choice = $(this).attr('data-value');
+        database.ref("player2").update({
+            choice: $(this).attr('data-value')
+        });
+        database.ref().update({
+            turn: 3
+        });
     });
 
     $('#chatBtn').on('click', function(event) {
@@ -146,103 +183,69 @@ $(document).ready(function() {
             chatText: chatText
         });
     });
-    
+
 
     database.ref('chat').on('value', function(snapshot) {
         if (snapshot.val().chatText !== "") {
             $('#chatMessages').append('<div>' + snapshot.val().chatText + '</div>');
             $('#chatField').val("");
-            $('#chatMessages').scrollTop( -200 );
+            // $('#chatMessages').scrollTop(-200);
         }
     });
 
     database.ref().on("value", function(snapshot) {
-        // console.log(snapshot.val());
-
 
         if (snapshot.child("player1").exists()) {
-            $('#player1Name').attr('data-status', 'taken');
-            $('#player1Name').text(snapshot.val().player1.username);
-            // make this a function
-            $('#player1Name').text(p1username);
-            $('#player1Wins').text(snapshot.val().player1.wins);
-            $('#player1Losses').text(snapshot.val().player1.losses);
-            $('#player1Ties').text(snapshot.val().player1.ties);
-            //
-            $('.player1Stats').show();
-        }
-
-        if (!snapshot.child("player1").exists()) {
-            $('#player1Name').attr('data-status', 'open')
-                .text("Waiting for Player 1...");
-            $('.player1Stats').hide();
-            $('.player2Btns').hide();
-            if (connectionId !== snapshot.val().player2.connectionId && connectionId !== undefined) {
-                $('.playerSelectUI').show();
-            }
+            playerExists(1, snapshot.val().player1, snapshot);
         }
 
         if (snapshot.child("player2").exists()) {
-            $('#player2Name').attr('data-status', 'taken');
-            $('#player2Name').text(snapshot.val().player2.username);
+            playerExists(2, snapshot.val().player2, snapshot);
+        }
 
-            $('#player2Name').text(p2username);
-            $('#player2Wins').text(snapshot.val().player2.wins);
-            $('#player2Losses').text(snapshot.val().player2.losses);
-            $('#player2Ties').text(snapshot.val().player2.ties);
-
-            $('.player2Stats').show();
+        if (!snapshot.child("player1").exists()) {
+            playerNotExists(1, 2, snapshot.val().player2, snapshot);
         }
 
         if (!snapshot.child("player2").exists()) {
-            $('#player2Name').attr('data-status', 'open')
-                .text("Waiting for Player 2...");
-            $('.player2Stats').hide();
-            $('.player1Btns').hide();
-            if (connectionId !== snapshot.val().player1.connectionId) {
-                $('.playerSelectUI').show();
-            }
+            playerNotExists(2, 1, snapshot.val().player1, snapshot);
         }
+
+        if (!snapshot.child("player1").exists() && !snapshot.child("player2").exists()) {
+            $('div.chatInput').hide();
+        }
+
         if (snapshot.child("player1").exists() && snapshot.child("player2").exists()) {
-            if (snapshot.val().player1.connectionId !== connectionId &&
-                snapshot.val().player2.connectionId !== connectionId) {
-                $('p.playerSelectUI').text('Game in Progress. Try again later.');
-                $('input.playerSelectUI').hide();
+
+            if (snapshot.val().player1.connectionId !== connectionId) {
+                if (snapshot.val().player2.connectionId !== connectionId) {
+                    $('p.playerSelectUI').text('Game in Progress. You must wait for a player to leave.');
+                    $('input.playerSelectUI').hide();
+                    $('div.chatInput').hide();
+                    $('.player1Btns').hide();
+                    $('.player2Btns').hide();
+                }
             }
+
             if (snapshot.val().turn === 1) {
-                //player 2 message
                 if (snapshot.val().player1.connectionId === connectionId) {
                     $('.player1Btns').show();
-                    $('button.input').on('click', function() {
-                        player1.choice = $(this).attr('data-value');
-                        database.ref("player1").update({
-                            choice: $(this).attr('data-value')
-                        });
-                        database.ref().update({
-                            turn: 2
-                        });
-                        $('.player1Btns').hide();
-                    });
                 } else if (snapshot.val().player2.connectionId === connectionId) {
                     $('#player2Name').append('<br>waiting for player1 to choose');
                 }
             } else if (snapshot.val().turn === 2) {
+                if (snapshot.val().player1.connectionId === connectionId) {
+                    $('.player1Btns').hide();
+                }
                 if (snapshot.val().player2.connectionId === connectionId) {
                     $('.player2Btns').show();
-                    $('button.input').on('click', function() {
-                        player2.choice = $(this).attr('data-value');
-                        database.ref("player2").update({
-                            choice: $(this).attr('data-value')
-                        });
-                        $('.player2Btns').hide();
-                        database.ref().update({
-                            turn: 3
-                        });
-                    });
                 } else if (snapshot.val().player1.connectionId === connectionId) {
                     $('#player1Name').append('<br>waiting for player2 to choose');
                 }
+            } else if (snapshot.val().turn === 3) {
+                $('.player2Btns').hide();
             }
+
             if (snapshot.val().player1.choice === snapshot.val().player2.choice &&
                 snapshot.val().player1.choice !== "" && snapshot.val().player2.choice !== "") {
                 $('.gameDisplay').text('you tied');
@@ -287,3 +290,15 @@ $(document).ready(function() {
         }
     });
 }); // end $(document).ready()
+
+// add comments to code
+// all combos of win loss
+// if p1 leaves on p1's turn
+// if p1 leaves on p2's turn
+// if p2 leave's on p1's turn
+// if p2 leave's on p2's turn
+// page behavior for observer during all of the above conditions
+// win, loss, tie transitions
+// styling & chat scroll/fix title to spot
+// validate files
+// deploy to git hub
