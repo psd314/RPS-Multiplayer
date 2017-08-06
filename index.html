@@ -15,62 +15,58 @@
   <body>
     
     <div class='container'>
-
       <div class='usernameInput'>
         <form>
           <p class='playerSelectUI'>Enter a username:</p>
           <input type="text"  class='usernameField playerSelectUI' ><input type="submit"  class="enterPlayerBtn playerSelectUI" >
-        </form>      
+        </form>
       </div>
-
       <div class='playerContainer'>
         <div class='left-col'>
-          <h1>Player 1</h1>
-          <div id='player1Name' data-status='open'>Waiting for Player 1...</div>
-          <div class='player1Btns'>
-            <button class='input p1Val' type='button'  data-value='r'>Rock</button>
-            <button class='input p1Val' type='button'  data-value='p'>Paper</button>
-            <button class='input p1Val' type='button'  data-value='s'>Scissors</button>
-          </div>
+          <h1 id='p1Heading'>Player 1</h1>
           <div class='player1Stats'>
-            <p>Wins<br><span id='player1Wins'></span></p>
-            <p>Losses<br><span id='player1Losses'></span></p>
-            <p>Ties<br><span id='player1Ties'></span></p>
+            <p>Wins: <span id='player1Wins'></span></p>
+            <p>Losses: <span id='player1Losses'></span></p>
+            <p>Ties: <span id='player1Ties'></span></p>
           </div>
+          <div class='player1Btns'>
+            <button class='input p1Val' type='button'  data-value='Rock'>Rock</button>
+            <button class='input p1Val' type='button'  data-value='Paper'>Paper</button>
+            <button class='input p1Val' type='button'  data-value='Scissors'>Scissors</button>
+          </div>
+          <div id='player1Name' data-status='open'>Waiting for Player 1...</div>
         </div>
         <div class='center-col'>
           <div class='gameDisplay'>
-            Output results here
+            Welcome to the Rock, Paper, Scissors Online Championship!
           </div>
         </div>
         <div class='right-col'>
-          <h1>Player 2</h1>
-          <div id='player2Name' data-status='open'>Waiting for Player 2...</div>
-          <div class='player2Btns'>
-            <button class='input p2Val' type='button'  data-value='r' >Rock</button>
-            <button class='input p2Val' type='button'  data-value='p' >Paper</button>
-            <button class='input p2Val' type='button'  data-value='s' >Scissors</button>
-          </div>
+          <h1 id='p2Heading'>Player 2</h1>
           <div class='player2Stats'>
-            <p>Wins<br><span id='player2Wins'></span></p>
-            <p>Losses<br><span id='player2Losses'></span></p>
-            <p>Ties<br><span id='player2Ties'></span></p>
+            <p>Wins: <span id='player2Wins'></span></p>
+            <p>Losses: <span id='player2Losses'></span></p>
+            <p>Ties: <span id='player2Ties'></span></p>
           </div>
+          <div class='player2Btns'>
+            <button class='input p2Val' type='button'  data-value='Rock' >Rock</button>
+            <button class='input p2Val' type='button'  data-value='Paper' >Paper</button>
+            <button class='input p2Val' type='button'  data-value='Scissors' >Scissors</button>
+          </div>
+          <div id='player2Name' data-status='open'>Waiting for Player 2...</div>
         </div>
-      </div> <!-- /.playerContainer -->
-
-      <div class='chatWindow'>
-        <h3>Chat Window</h3>
-        <div id='chatMessages'></div>
-      </div>
-      
-      <div class='chatInput'>
-        <form>
-          <input id="chatField" type="text"><input id="chatBtn" type="submit">
-        </form> 
-      </div>
-
-    </div>  <!-- /.container -->
-    <script src="assets/javascript/app2.js"></script>
-  </body>
-</html>
+        </div> <!-- /.playerContainer -->
+        <div class='chatWindow'>
+          <h3>Chat Window</h3>
+          <div id='chatMessages'></div>
+        </div>
+        
+        <div class='chatInput'>
+          <form>
+            <input id="chatField" type="text"><input id="chatBtn" type="submit">
+          </form>
+        </div>
+        </div>  <!-- /.container -->
+        <script src="assets/javascript/app2.js"></script>
+      </body>
+    </html>
