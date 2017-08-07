@@ -299,5 +299,3 @@ $(document).ready(function() {
     }); // end database.ref().on('value') listener
 }); // end $(document).ready()
 
-//  
-// validate files
