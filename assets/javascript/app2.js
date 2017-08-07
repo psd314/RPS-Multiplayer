@@ -104,7 +104,7 @@ function reset() {
 }
 
 function updateStats(winner, winnerPath, loser, loserPath, ) {
-    $('.gameDisplay').html('<h1><strong>' + winnerPath.username + '</strong> Wins!!!</h1>' + '<div><strong>' + winnerPath.username + ' </strong>chose ' +
+    $('.gameDisplay').html('<h2><strong>' + winnerPath.username + '</strong> Wins!!!</h2>' + '<div><strong>' + winnerPath.username + ' </strong>chose ' +
         $(`.${winner}Val[data-value=${winnerPath.choice}]`).html() + '</div>' +
         '<div><strong>' + loserPath.username + ' </strong>chose ' +
         $(`.${loser}Val[data-value=${loserPath.choice}]`).html() + '</div>');
@@ -140,7 +140,7 @@ $(document).ready(function() {
                 turn: 1
             });
             // set up disconnect message, displays to remaining players and observers
-            disconnected = username + ' has disconnected';
+            disconnected = '<span class="luckyFont">' + username + ' <span class="missSkinnyFont">has disconnected</span>';
             database.ref("chat").onDisconnect().update({
                 chatText: disconnected
             });
@@ -156,7 +156,7 @@ $(document).ready(function() {
                 turn: 1
             });
             // set up disconnect message, displays to remaining players and observers
-            disconnected = username + ' has disconnected';
+            disconnected = '<span class="luckyFont">' + username + ' <span class="missSkinnyFont">has disconnected</span>';
             database.ref("chat").onDisconnect().update({
                 chatText: disconnected
             });
@@ -187,7 +187,7 @@ $(document).ready(function() {
     // send chat message to fb db
     $('#chatBtn').on('click', function(event) {
         event.preventDefault();
-        chatText = username + ': ' + $('#chatField').val();
+        chatText = '<span class="luckyFont">' + username + ':</span><span class="missSkinnyFont"> ' + $('#chatField').val() + '</span>';
         database.ref('chat').update({
             chatText: chatText
         });
@@ -196,7 +196,7 @@ $(document).ready(function() {
     // display chat messages and scroll down to latest?
     database.ref('chat').on('value', function(snapshot) {
         if (snapshot.val().chatText !== "") {
-            $('#chatMessages').append('<div>' + snapshot.val().chatText + '</div>');
+            $('#chatMessages').append('<div class="leftBump">' + snapshot.val().chatText + '</div>');
             $('#chatField').val("");
             $('.chatWindow').scrollTop($('.chatWindow').prop('scrollHeight')); // auto-scroll window
             database.ref('chat').update({
@@ -247,7 +247,7 @@ $(document).ready(function() {
 
                 } else if (snapshot.val().player2.connectionId === connectionId) {
                     $('.gameDisplay').html("<h2>Let's Play RPS!!!</h2>");
-                    $('#player2Name').append('<br>Waiting for Player 1 to choose');
+                    $('#player2Name').append('<br>Waiting for Player 1<br> to choose');
 
                 }
             } else if (snapshot.val().turn === 2) {
@@ -258,7 +258,7 @@ $(document).ready(function() {
                     $('.player2Btns').show();
                     $('#player2Name').text("It's your turn");
                 } else if (snapshot.val().player1.connectionId === connectionId) {
-                    $('#player1Name').append('<br>Waiting for Player 2 to choose');
+                    $('#player1Name').append('<br>Waiting for Player 2<br> to choose');
                 }
             } else if (snapshot.val().turn === 3) {
                 $('.player2Btns').hide();
@@ -266,9 +266,8 @@ $(document).ready(function() {
             // game logic - compare player choices and update page accordingly
             if (snapshot.val().player1.choice === snapshot.val().player2.choice &&
                 snapshot.val().player1.choice !== "" && snapshot.val().player2.choice !== "") {
-                // $('.gameDisplay').text('Tie Game! You both chose: ' + snapshot.val().player1.choice);
                 tie = snapshot.val().player1.choice;
-                $('.gameDisplay').html('<h1>Tie Game!</h1><div>You both chose:</div><div>' + $(`.player1Val[data-value=${tie}]`).html() + '</div>');
+                $('.gameDisplay').html('<h2>Tie Game!</h2><div>You both chose:</div><div>' + $(`.player1Val[data-value=${tie}]`).html() + '</div>');
                 tieGame(snapshot);
 
             } else if (snapshot.val().player1.choice === 'Rock' && snapshot.val().player2.choice === 'Scissors') {

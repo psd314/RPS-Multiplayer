@@ -2,48 +2,123 @@
 	box-sizing: border-box;
 }
 
+@font-face {
+	font-family: LuckiestGuy;
+	src: url("LuckiestGuy.ttf");
+}
+
+@font-face {
+	font-family: "Miss Smarty Pants";
+	src: url("Miss Smarty Pants.ttf");
+}
+
+ button {
+	background-color: transparent;
+	border: none;
+}
+
+input[type='submit'] {
+	background-color: transparent;
+	border: none;
+}
+
+input[type='text'] {
+	padding-left: 5px;
+	border: 1px solid;
+}
+
+input[type='text']:focus {
+	outline: none;
+}
+
+#chatForm {
+	/*border: 1px solid black;*/
+	/*border-radius: 5px;*/
+}
+
+p.playerSelectUI {
+	margin-top: 0;
+}
+
+input.playerSelectUI {
+	margin-bottom: 50px;
+}
+
+h1#p1Heading,
+h1#p2Heading {
+	margin-top: 0;
+}
+
+div.gameDisplay h2 {
+	margin-top: 0;
+}
+
+#player1Name,
+#player2Name {
+	margin-bottom: 30px;
+}
+
+#gameHeader {
+	margin-top: 0;
+}
+
+.luckyFont {
+	font-family: LuckiestGuy;
+}
+
+.missSkinnyFont {
+	font-family: "Miss Smarty Pants";
+	font-weight: bold;
+}
+
 .container {
-	width: 60%;
+	width: 50%;
 	margin: 30px auto;
 }
 
 .usernameInput {
 	text-align: center;
+	height: 100px;
+	/*border: 1px solid red;*/
 }
 
 .playerContainer {
 	display: flex;
+	height: 70vh;
+	/*border: 1px solid orange;*/
 }
 
 .chatWindow {
 	text-align: center;
+	background: lightgrey;
 }
 
 .left-col,
 .center-col,
 .right-col {
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
 
 .left-col,
 .right-col {
-	width: 25%;
+	width: 20%;
 	text-align: center;
 }
 
 .center-col {
-	width: 50%;
-	/*height: 300px;*/
+	width: 60%;
 	text-align: center;
 }
 
 .gameDisplay {
-	height: 200px;
+	height: 60%;
 }
 
 .chatContainer {
 	margin: auto;
-	border: 1px solid black;
+	height: 40%;
+	/*border: 1px solid black;*/
+	border-radius: 10px;
 	text-align: center;
 }
 
@@ -60,15 +135,29 @@
 	word-break: break-all;
 }
 
+.chatHeader {
+	border: 1px solid black;
+}
+
+h3.chatHeader  {
+	display: block;
+	background: black;
+	color: white;
+	margin-top: 10px;
+}
+
+.leftBump {
+	margin-left: 10px;
+}
+
 #chatField {
 	width: 85%;
 }
 
 #chatBtn {
 	width: 15%;
+	background: black;
+	color: white;
+	border-bottom: 2px solid black;
 }
 
- button {
-	background-color: transparent;
-	border: none;
-}

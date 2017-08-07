@@ -18,55 +18,55 @@
     <div class='container'>
       <div class='usernameInput'>
         <form>
-          <p class='playerSelectUI'>Enter a username:</p>
-          <input type="text"  class='usernameField playerSelectUI' ><input type="submit"  class="enterPlayerBtn playerSelectUI" >
+          <p class='playerSelectUI luckyFont'>Enter a username:</p>
+          <input type="text"  class='usernameField playerSelectUI missSkinnyFont' ><input type="submit"  class="enterPlayerBtn playerSelectUI luckyFont" >
         </form>
       </div>
       <div class='playerContainer'>
         <div class='left-col'>
-          <h1 id='p1Heading'>Player 1</h1>
+          <h1 id='p1Heading' class='luckyFont'>Player 1</h1>
           <div class='player1Stats'>
-            <p>Wins: <span id='player1Wins'></span></p>
-            <p>Losses: <span id='player1Losses'></span></p>
-            <p>Ties: <span id='player1Ties'></span></p>
+            <p class='missSkinnyFont'>Wins: <span id='player1Wins'></span></p>
+            <p class='missSkinnyFont'>Losses: <span id='player1Losses'></span></p>
+            <p class='missSkinnyFont'>Ties: <span id='player1Ties'></span></p>
           </div>
-          <div id='player1Name' data-status='open'>Waiting for Player 1...</div>
+          <div id='player1Name' class='missSkinnyFont' data-status='open'>Waiting for Player 1...</div>
           <div class='player1Btns'>
-            <button class='input p1Val player1Val' type='button'  data-value='Rock'><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i></button>
-            <button class='input p1Val player1Val' type='button'  data-value='Paper'><i class="fa fa-hand-paper-o fa-3x"></i></button>
+            <button class='input p1Val player1Val' type='button'  data-value='Rock'><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i></button><br>
+            <button class='input p1Val player1Val' type='button'  data-value='Paper'><i class="fa fa-hand-paper-o fa-3x"></i></button><br>
             <button class='input p1Val player1Val' type='button'  data-value='Scissors'><i class="fa fa-hand-scissors-o fa-3x"></i></button>
           </div>
         </div>
         <div class='center-col'>
-          <div class='gameDisplay'>
-            Rock, Paper, Scissors Online Championship!
+          <div class='gameDisplay luckyFont'>
+            <span id='gameHeader'>Rock, Paper, Scissors Online Championship!</span>
           </div>
           <div class='chatContainer'>
-            <h3 class='chatHeader'>Chat Room</h3>
+            <h3 class='chatHeader luckyFont'>Chat Room</h3>
             <div class='chatWindow'>
               <div id='chatMessages'></div>
             </div>
             <div class='chatInput'>
-              <form>
-                <input id="chatField" type="text"><input id="chatBtn" type="submit">
+              <form id='chatForm'>
+                <input id="chatField" class="missSkinnyFont" type="text"><input id="chatBtn" class="luckyFont" type="submit">
               </form>
             </div>
-          </div>          
+          </div>
         </div>
         <div class='right-col'>
-          <h1 id='p2Heading'>Player 2</h1>
+          <h1 id='p2Heading' class='luckyFont'>Player 2</h1>
           <div class='player2Stats'>
-            <p>Wins: <span id='player2Wins'></span></p>
-            <p>Losses: <span id='player2Losses'></span></p>
-            <p>Ties: <span id='player2Ties'></span></p>
+            <p class='missSkinnyFont'>Wins: <span id='player2Wins'></span></p>
+            <p class='missSkinnyFont'>Losses: <span id='player2Losses'></span></p>
+            <p class='missSkinnyFont'>Ties: <span id='player2Ties'></span></p>
           </div>
+          <div id='player2Name' class='missSkinnyFont' data-status='open'>Waiting for Player 2...</div>
           <div class='player2Btns'>
             <button class='input p2Val player2Val' type='button'  data-value='Rock' ><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i>
-            </button>
-            <button class='input p2Val player2Val' type='button'  data-value='Paper' ><i class="fa fa-hand-paper-o fa-3x"></i></button>
+            </button><br>
+            <button class='input p2Val player2Val' type='button'  data-value='Paper' ><i class="fa fa-hand-paper-o fa-3x"></i></button><br>
             <button class='input p2Val player2Val' type='button'  data-value='Scissors' ><i class="fa fa-hand-scissors-o fa-3x"></i></button>
           </div>
-          <div id='player2Name' data-status='open'>Waiting for Player 2...</div>
         </div>
         </div> <!-- /.playerContainer -->
         
