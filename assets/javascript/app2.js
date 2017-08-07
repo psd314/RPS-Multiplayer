@@ -46,13 +46,14 @@ function playerExists(playerNumber, playerPath, snapshot) {
     if (playerPath.connectionId === connectionId) {
         $('p.playerSelectUI').html("Welcome<strong> " + playerPath.username + "</strong>. You are Player " + playerNumber);
         $('input.playerSelectUI').hide();
-        $('div.chatInput').show();
+        $('#chatField').show();
+        $('#chatBtn').show();
     }
 }
 
 // html behavior for player slot when slot is empty, executes on fb value change
 function playerNotExists(playerNumber, oppNumber, oppPath, snapshot) {
-    $('.gameDisplay').text("Rock, Paper, Scissors Online Championship!");
+    $('.gameDisplay').html("<h1 id='gameHeader'>RPS Online Championship!</h1>");
     $(`#player${playerNumber}Name`).attr('data-status', 'open')
         .text("Waiting for Player...");
     $(`#p${playerNumber}Heading`).text(`Player ${playerNumber}`);
@@ -64,6 +65,9 @@ function playerNotExists(playerNumber, oppNumber, oppPath, snapshot) {
         if (connectionId !== oppPath.connectionId) {
             $('p.playerSelectUI').text('Enter a username:');
             $('.playerSelectUI').show();
+            $('#chatField').hide();
+            $('#chatBtn').hide();
+
         }
     }
 }
@@ -96,7 +100,7 @@ function updateLosses(player, path) {
 
 function reset() {
     setTimeout(function() {
-        $('.gameDisplay').html("<h2>Let's Play RPS!!!</h2>");
+        $('.gameDisplay').html("<h1 id='gameHeader'>Let's Play RPS!!!</h1>");
         database.ref().update({
             turn: 1
         });
@@ -104,8 +108,8 @@ function reset() {
 }
 
 function updateStats(winner, winnerPath, loser, loserPath, ) {
-    $('.gameDisplay').html('<h2><strong>' + winnerPath.username + '</strong> Wins!!!</h2>' + '<div><strong>' + winnerPath.username + ' </strong>chose ' +
-        $(`.${winner}Val[data-value=${winnerPath.choice}]`).html() + '</div>' +
+    $('.gameDisplay').html('<h1 id="gameHeader"><strong>' + winnerPath.username + '</strong> Wins!!!</h1>' + '<div><strong>' + winnerPath.username + ' </strong>chose ' +
+        $(`.${winner}Val[data-value=${winnerPath.choice}]`).html() + '</div><br>' +
         '<div><strong>' + loserPath.username + ' </strong>chose ' +
         $(`.${loser}Val[data-value=${loserPath.choice}]`).html() + '</div>');
     updateWins(winner, winnerPath.wins);
@@ -114,7 +118,7 @@ function updateStats(winner, winnerPath, loser, loserPath, ) {
 }
 
 $(document).ready(function() {
-    // $('.player1Btns, .player1Stats, .player2Btns, .player2Stats').hide();
+    $('.player1Btns, .player1Stats, .player2Btns, .player2Stats').hide(); // hide on load to prevent html flash from firebase lag
     // monitor partieds connected to fb db
     connectedRef.on("value", function(snap) {
         if (snap.val()) {
@@ -224,7 +228,8 @@ $(document).ready(function() {
         }
 
         if (!snapshot.child("player1").exists() && !snapshot.child("player2").exists()) {
-            $('div.chatInput').hide(); //hide chat input if no players exist
+            $('#chatField').hide();
+            $('#chatBtn').hide(); //hide chat input if no players exist
         }
 
         if (snapshot.child("player1").exists() && snapshot.child("player2").exists()) {
@@ -233,7 +238,8 @@ $(document).ready(function() {
                 if (snapshot.val().player2.connectionId !== connectionId) {
                     $('p.playerSelectUI').text('Game in Progress. You must wait for a player to leave.');
                     $('input.playerSelectUI').hide();
-                    $('div.chatInput').hide();
+                    $('#chatField').hide();
+                    $('#chatBtn').hide();
                     $('.player1Btns').hide();
                     $('.player2Btns').hide();
                 }
@@ -241,12 +247,12 @@ $(document).ready(function() {
             // button/html display behavior based on turn and connectionId
             if (snapshot.val().turn === 1) {
                 if (snapshot.val().player1.connectionId === connectionId) {
-                    $('.gameDisplay').html("<h2>Let's Play RPS!!!</h2>");
+                    $('.gameDisplay').html("<h1 id='gameHeader'>Let's Play RPS!!!</h1>");
                     $('.player1Btns').show();
                     $('#player1Name').text("It's your turn");
 
                 } else if (snapshot.val().player2.connectionId === connectionId) {
-                    $('.gameDisplay').html("<h2>Let's Play RPS!!!</h2>");
+                    $('.gameDisplay').html("<h1 id='gameHeader'>Let's Play RPS!!!</h1>");
                     $('#player2Name').append('<br>Waiting for Player 1<br> to choose');
 
                 }
@@ -267,7 +273,7 @@ $(document).ready(function() {
             if (snapshot.val().player1.choice === snapshot.val().player2.choice &&
                 snapshot.val().player1.choice !== "" && snapshot.val().player2.choice !== "") {
                 tie = snapshot.val().player1.choice;
-                $('.gameDisplay').html('<h2>Tie Game!</h2><div>You both chose:</div><div>' + $(`.player1Val[data-value=${tie}]`).html() + '</div>');
+                $('.gameDisplay').html('<h1 id="gameHeader">Tie Game!</h1><div>You both chose:</div><div>' + $(`.player1Val[data-value=${tie}]`).html() + '</div>');
                 tieGame(snapshot);
 
             } else if (snapshot.val().player1.choice === 'Rock' && snapshot.val().player2.choice === 'Scissors') {

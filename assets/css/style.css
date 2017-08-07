@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	/*font-size: 1.125rem;*/
 }
 
 @font-face {
@@ -12,28 +13,31 @@
 	src: url("Miss Smarty Pants.ttf");
 }
 
+
+body {
+	background: lightgrey;
+}
+
  button {
 	background-color: transparent;
 	border: none;
 }
 
 input[type='submit'] {
-	background-color: transparent;
+	background-color: black;
+	color: white;
 	border: none;
 }
 
 input[type='text'] {
 	padding-left: 5px;
-	border: 1px solid;
+	border: none;
 }
 
+button:focus,
+input[type='submit']:focus,
 input[type='text']:focus {
 	outline: none;
-}
-
-#chatForm {
-	/*border: 1px solid black;*/
-	/*border-radius: 5px;*/
 }
 
 p.playerSelectUI {
@@ -41,12 +45,14 @@ p.playerSelectUI {
 }
 
 input.playerSelectUI {
-	margin-bottom: 50px;
+	margin-bottom: 0px;
 }
 
 h1#p1Heading,
 h1#p2Heading {
 	margin-top: 0;
+	background: black;
+	color: white;
 }
 
 div.gameDisplay h2 {
@@ -60,8 +66,13 @@ div.gameDisplay h2 {
 
 #gameHeader {
 	margin-top: 0;
+	background: black;
+	color: white;
 }
 
+#gameHeader h1 {
+	margin: 0;
+}
 .luckyFont {
 	font-family: LuckiestGuy;
 }
@@ -72,31 +83,28 @@ div.gameDisplay h2 {
 }
 
 .container {
-	width: 50%;
+	width: 55%;
 	margin: 30px auto;
 }
 
 .usernameInput {
 	text-align: center;
 	height: 100px;
-	/*border: 1px solid red;*/
+	padding-top: 15px;
+	background: black;
+	color: white;
 }
 
 .playerContainer {
 	display: flex;
-	height: 70vh;
-	/*border: 1px solid orange;*/
-}
-
-.chatWindow {
-	text-align: center;
-	background: lightgrey;
+	height: 50vh;
+	background: #eee;
 }
 
 .left-col,
-.center-col,
 .right-col {
-	/*border: 1px solid black;*/
+	border-left: 1px solid black;
+	border-right: 1px solid black;
 }
 
 .left-col,
@@ -117,8 +125,7 @@ div.gameDisplay h2 {
 .chatContainer {
 	margin: auto;
 	height: 40%;
-	/*border: 1px solid black;*/
-	border-radius: 10px;
+	/*border-left: 1px solid black;*/
 	text-align: center;
 }
 
@@ -126,24 +133,27 @@ div.gameDisplay h2 {
 	display: inline-block;
 	margin: 0;
 }
- 
+
 .chatWindow {
 	height: 100px;
 	text-align: left;
 	overflow-y: scroll;
 	overflow-x: auto;
 	word-break: break-all;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	color: black;
 }
 
 .chatHeader {
-	border: 1px solid black;
+	/*border-left: 1px solid red;*/
 }
 
 h3.chatHeader  {
 	display: block;
 	background: black;
 	color: white;
-	margin-top: 10px;
+	margin-top: 0px;
 }
 
 .leftBump {
@@ -158,6 +168,6 @@ h3.chatHeader  {
 	width: 15%;
 	background: black;
 	color: white;
-	border-bottom: 2px solid black;
+	border-bottom: 1px solid black;
 }
 
