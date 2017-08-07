@@ -143,7 +143,7 @@ $(document).ready(function() {
                 player1: player1,
                 turn: 1
             });
-            // set up disconnect message, displays to remaining players and observers
+            // set up disconnect message, this will display to remaining players and observers
             disconnected = '<span class="luckyFont">' + username + ' <span class="missSkinnyFont">has disconnected</span>';
             database.ref("chat").onDisconnect().update({
                 chatText: disconnected
@@ -299,12 +299,5 @@ $(document).ready(function() {
     }); // end database.ref().on('value') listener
 }); // end $(document).ready()
 
-// styling 
+//  
 // validate files
-// deploy to git hub pages and test
-// if p1 leaves on p1's turn
-// if p1 leaves on p2's turn
-// if p2 leave's on p1's turn
-// if p2 leave's on p2's turn
-// page behavior for observer during all of the above conditions
-// chat behavior is correct

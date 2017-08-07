@@ -75,6 +75,7 @@ div.gameDisplay h2 {
 }
 .luckyFont {
 	font-family: LuckiestGuy;
+    letter-spacing: 2px;
 }
 
 .missSkinnyFont {

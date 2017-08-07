@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Title</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="https://use.fontawesome.com/9b186a5162.js"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-  </head>
-  <body>
-    <div class='usernameInput'>
-      <form>
-        <p class='playerSelectUI luckyFont'>Enter a username:</p>
-        <input type="text"  class='usernameField playerSelectUI missSkinnyFont' ><input type="submit"  class="enterPlayerBtn playerSelectUI luckyFont" >
-      </form>
-    </div>
-    <div class='container'>
+<head>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="https://use.fontawesome.com/9b186a5162.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+</head>
+<body>
+  <div class='usernameInput'>
+    <form>
+      <p class='playerSelectUI luckyFont'>Enter a username:</p>
+      <input type="text"  class='usernameField playerSelectUI missSkinnyFont' ><input type="submit"  class="enterPlayerBtn playerSelectUI luckyFont" >
+    </form>
+  </div>
+  <div class='container'>
+    <div class='playerContainer'>
+      <div class='left-col'>
+        <h1 id='p1Heading' class='luckyFont'>Player 1</h1>
+        <div class='player1Stats'>
+          <p class='missSkinnyFont'>Wins: <span id='player1Wins'></span></p>
+          <p class='missSkinnyFont'>Losses: <span id='player1Losses'></span></p>
+          <p class='missSkinnyFont'>Ties: <span id='player1Ties'></span></p>
+        </div>
+        <div id='player1Name' class='missSkinnyFont' data-status='open'>Waiting for Player 1...</div>
+        <div class='player1Btns'>
+          <button class='input p1Val player1Val' type='button'  data-value='Rock'><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i></button><br>
+          <button class='input p1Val player1Val' type='button'  data-value='Paper'><i class="fa fa-hand-paper-o fa-3x"></i></button><br>
+          <button class='input p1Val player1Val' type='button'  data-value='Scissors'><i class="fa fa-hand-scissors-o fa-3x"></i></button>
+        </div>
+      </div>
+      <div class='center-col'>
+        <div class='gameDisplay luckyFont'>
+          <h1 id='gameHeader'>RPS Online Championship!</h1>
+        </div>
+      </div>
+      <div class='right-col'>
+        <h1 id='p2Heading' class='luckyFont'>Player 2</h1>
+        <div class='player2Stats'>
+          <p class='missSkinnyFont'>Wins: <span id='player2Wins'></span></p>
+          <p class='missSkinnyFont'>Losses: <span id='player2Losses'></span></p>
+          <p class='missSkinnyFont'>Ties: <span id='player2Ties'></span></p>
+        </div>
+        <div id='player2Name' class='missSkinnyFont' data-status='open'>Waiting for Player 2...</div>
+        <div class='player2Btns'>
+          <button class='input p2Val player2Val' type='button'  data-value='Rock' ><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i>
+          </button><br>
+          <button class='input p2Val player2Val' type='button'  data-value='Paper' ><i class="fa fa-hand-paper-o fa-3x"></i></button><br>
+          <button class='input p2Val player2Val' type='button'  data-value='Scissors' ><i class="fa fa-hand-scissors-o fa-3x"></i></button>
+        </div>
+      </div>
+    </div> <!-- /.playerContainer -->
+
+      <div class='chatContainer'>
+        <h3 class='chatHeader luckyFont'>Chat Room</h3>
+        <div class='chatWindow'>
+          <div id='chatMessages'></div>
+        </div>
+        <div class='chatInput'>
+          <form id='chatForm'>
+            <input id="chatField" class="missSkinnyFont" type="text"><input id="chatBtn" class="luckyFont" type="submit">
+          </form>
+        </div>
+      </div> <!-- /.chatContainer -->
       
-      <div class='playerContainer'>
-        <div class='left-col'>
-          <h1 id='p1Heading' class='luckyFont'>Player 1</h1>
-          <div class='player1Stats'>
-            <p class='missSkinnyFont'>Wins: <span id='player1Wins'></span></p>
-            <p class='missSkinnyFont'>Losses: <span id='player1Losses'></span></p>
-            <p class='missSkinnyFont'>Ties: <span id='player1Ties'></span></p>
-          </div>
-          <div id='player1Name' class='missSkinnyFont' data-status='open'>Waiting for Player 1...</div>
-          <div class='player1Btns'>
-            <button class='input p1Val player1Val' type='button'  data-value='Rock'><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i></button><br>
-            <button class='input p1Val player1Val' type='button'  data-value='Paper'><i class="fa fa-hand-paper-o fa-3x"></i></button><br>
-            <button class='input p1Val player1Val' type='button'  data-value='Scissors'><i class="fa fa-hand-scissors-o fa-3x"></i></button>
-          </div>
-        </div>
-        <div class='center-col'>
-          <div class='gameDisplay luckyFont'>
-            <h1 id='gameHeader'>RPS Online Championship!</h1>
-          </div>
-          
-        </div>
-        <div class='right-col'>
-          <h1 id='p2Heading' class='luckyFont'>Player 2</h1>
-          <div class='player2Stats'>
-            <p class='missSkinnyFont'>Wins: <span id='player2Wins'></span></p>
-            <p class='missSkinnyFont'>Losses: <span id='player2Losses'></span></p>
-            <p class='missSkinnyFont'>Ties: <span id='player2Ties'></span></p>
-          </div>
-          <div id='player2Name' class='missSkinnyFont' data-status='open'>Waiting for Player 2...</div>
-          <div class='player2Btns'>
-            <button class='input p2Val player2Val' type='button'  data-value='Rock' ><i class="fa fa-hand-rock-o fa-3x fa-rotate-90"></i>
-            </button><br>
-            <button class='input p2Val player2Val' type='button'  data-value='Paper' ><i class="fa fa-hand-paper-o fa-3x"></i></button><br>
-            <button class='input p2Val player2Val' type='button'  data-value='Scissors' ><i class="fa fa-hand-scissors-o fa-3x"></i></button>
-          </div>
-        </div>
-        </div> <!-- /.playerContainer -->
-        <div class='chatContainer'>
-            <h3 class='chatHeader luckyFont'>Chat Room</h3>
-            <div class='chatWindow'>
-              <div id='chatMessages'></div>
-            </div>
-            <div class='chatInput'>
-              <form id='chatForm'>
-                <input id="chatField" class="missSkinnyFont" type="text"><input id="chatBtn" class="luckyFont" type="submit">
-              </form>
-            </div>
-          </div> <!-- /.chatContainer -->
-        
-        </div>  <!-- /.container -->
-        <script src="assets/javascript/app2.js"></script>
-      </body>
-    </html>
+  </div>  <!-- /.container -->
+  <script src="assets/javascript/app2.js"></script>
+  </body>
+</html>
